@@ -26,8 +26,6 @@ public class UserCreator {
     @PostConstruct
     private void init() {
         addAdmin();
-
-
     }
 
 

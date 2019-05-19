@@ -20,16 +20,16 @@ import java.util.Optional;
 @Service
 public class UserService implements UserDetailsService {
 
-    private final UserRepo userRepository;
+    private final UserRepo userRepo;
 
     @Autowired
-    public UserService(UserRepo userRepository) {
-        this.userRepository = userRepository;
+    public UserService(UserRepo userRepo) {
+        this.userRepo = userRepo;
     }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        Optional<User> opUser = userRepository.findByUsername(s);
+        Optional<User> opUser = userRepo.findByUsername(s);
         if (!opUser.isPresent()) {
             throw new UsernameNotFoundException(s);
         }
@@ -37,19 +37,18 @@ public class UserService implements UserDetailsService {
     }
 
     public void createUser(User user, PasswordEncoder passwordEncoder) throws UserRegistrationFailedException {
-        if (!userRepository.existsByUsernameOrEmail(user.getUsername(), user.getEmail())) {
-            if (user.getPassword().length() <= 20) {
+        if (!userRepo.existsByUsernameOrEmail(user.getUsername(), user.getEmail())) {
+            if (user.getPassword().length() <= 16) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 user.setActive(true);
                 user.setRoles(Collections.singleton(Role.USER));
-                userRepository.save(user);
-            } else throw new IllegalArgumentException("Maximum password length is 20  characters");
+                userRepo.save(user);
+            } else throw new IllegalArgumentException("Maximum password length is 16  characters");
         } else throw new UserRegistrationFailedException("Failed to register new user, because username or email already exist.");
-
     }
 
     public boolean isRegistered(String username) throws HibernateException {
-        return userRepository.existsByUsername(username);
+        return userRepo.existsByUsername(username);
     }
 
     public User getAccountIbfo() {
@@ -61,7 +60,7 @@ public class UserService implements UserDetailsService {
         if (currentUser != null) {
             if (email != null && isEmailRegisteredOnAnotherUser(email, currentUser.getId()))
                 currentUser.setEmail(email);
-            userRepository.save(currentUser);
+            userRepo.save(currentUser);
         } else throw new UsernameNotFoundException("Cannot find user");
     }
 
@@ -69,9 +68,9 @@ public class UserService implements UserDetailsService {
         User currentUser = (User) loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         if (currentUser != null && oldPassword != null) {
             if (BCrypt.checkpw(oldPassword, currentUser.getPassword())) {
-                if (newPassword != null && newPassword.length() >= 6) {
+                if (newPassword != null && newPassword.length() >= 6 && newPassword.length() <= 16) {
                     currentUser.setPassword(passwordEncoder.encode(newPassword));
-                    userRepository.save(currentUser);
+                    userRepo.save(currentUser);
                 } else throw new IllegalArgumentException("Invalid new password");
             } else throw new IllegalArgumentException("Passwords do not match");
         } else throw new UsernameNotFoundException("Cannot find user");
@@ -80,11 +79,11 @@ public class UserService implements UserDetailsService {
 
 
     private boolean isEmailRegisteredOnAnotherUser(String email, Long userId) {
-        return userRepository.countUserByEmailAndIdNot(email, userId) > 0;
+        return userRepo.countUserByEmailAndIdNot(email, userId) > 0;
     }
 
     public boolean isEmailExist(String email) {
-        return userRepository.existsByEmail(email);
+        return userRepo.existsByEmail(email);
     }
 
     public boolean checkEmailRegistrationOnAnotherUser(String email) {
