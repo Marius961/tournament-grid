@@ -37,9 +37,4 @@ public class AuthController {
         return Collections.singletonMap("isRegistered", userService.isRegistered(payload.get("username")));
     }
 
-    @PostMapping("/is-email-exist")
-    public Map<String, Boolean> checkEmail(@RequestBody Map<String, String> payload) {
-        return Collections.singletonMap("isExist", userService.isEmailExist(payload.get("email")));
-    }
-
 }

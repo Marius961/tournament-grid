@@ -6,7 +6,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Collection;
@@ -23,12 +22,6 @@ public class User implements UserDetails {
     @Column(unique = true)
     @Size(min=3, max = 16)
     private String username;
-
-    @NotBlank
-    @Email
-    @Column(unique = true)
-    @Size(max = 32)
-    private String email;
 
     @NotBlank
     @Size(min = 6, max = 512)
@@ -91,14 +84,6 @@ public class User implements UserDetails {
         this.username = username;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -126,5 +111,4 @@ public class User implements UserDetails {
     public void addRole(Role role) {
         this.roles.add(role);
     }
-
 }

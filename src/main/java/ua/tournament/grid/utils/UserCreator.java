@@ -4,23 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ua.tournament.grid.entities.Role;
+import ua.tournament.grid.entities.Stage;
 import ua.tournament.grid.entities.User;
+import ua.tournament.grid.repo.StageRepo;
 import ua.tournament.grid.repo.UserRepo;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 @Component
 public class UserCreator {
 
     private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;
+    private final StageRepo stageRepo;
 
     @Autowired
-    public UserCreator(UserRepo userRepo, PasswordEncoder passwordEncoder) {
+    public UserCreator(UserRepo userRepo, PasswordEncoder passwordEncoder, StageRepo stageRepo) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
+        this.stageRepo = stageRepo;
     }
 
     @PostConstruct
@@ -33,9 +38,17 @@ public class UserCreator {
         User admin = new User();
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("admin"));
-        admin.setEmail("admin@mail.com");
         admin.setActive(true);
         admin.setRoles(new HashSet<>(Arrays.asList(Role.USER, Role.ADMIN)));
         userRepo.save(admin);
+
+        Set<Stage> stageSet = new HashSet<>();
+        stageSet.add(new Stage("Кваліфікації", 64));
+        stageSet.add(new Stage("Етап претендентів", 32));
+        stageSet.add(new Stage("Груповий етап", 16));
+        stageSet.add(new Stage("Чверть фінал", 8));
+        stageSet.add(new Stage("напів-фінал", 4));
+        stageSet.add(new Stage("Фінал", 4));
+        stageRepo.saveAll(stageSet);
     }
 }

@@ -37,7 +37,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void createUser(User user, PasswordEncoder passwordEncoder) throws UserRegistrationFailedException {
-        if (!userRepo.existsByUsernameOrEmail(user.getUsername(), user.getEmail())) {
+        if (!userRepo.existsByUsername(user.getUsername())) {
             if (user.getPassword().length() <= 16) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 user.setActive(true);
@@ -55,15 +55,6 @@ public class UserService implements UserDetailsService {
         return (User) loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
-    public void updateUserDat(String email) {
-        User currentUser = (User) loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        if (currentUser != null) {
-            if (email != null && isEmailRegisteredOnAnotherUser(email, currentUser.getId()))
-                currentUser.setEmail(email);
-            userRepo.save(currentUser);
-        } else throw new UsernameNotFoundException("Cannot find user");
-    }
-
     public void changePassword(String oldPassword, String newPassword, PasswordEncoder passwordEncoder) {
         User currentUser = (User) loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         if (currentUser != null && oldPassword != null) {
@@ -74,20 +65,5 @@ public class UserService implements UserDetailsService {
                 } else throw new IllegalArgumentException("Invalid new password");
             } else throw new IllegalArgumentException("Passwords do not match");
         } else throw new UsernameNotFoundException("Cannot find user");
-    }
-
-
-
-    private boolean isEmailRegisteredOnAnotherUser(String email, Long userId) {
-        return userRepo.countUserByEmailAndIdNot(email, userId) > 0;
-    }
-
-    public boolean isEmailExist(String email) {
-        return userRepo.existsByEmail(email);
-    }
-
-    public boolean checkEmailRegistrationOnAnotherUser(String email) {
-        User currentUser = (User) loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        return isEmailRegisteredOnAnotherUser(email, currentUser.getId());
     }
 }

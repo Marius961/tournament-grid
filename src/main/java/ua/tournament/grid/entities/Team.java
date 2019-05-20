@@ -15,11 +15,18 @@ public class Team {
     private Long id;
 
     @NotBlank
+    @Column(unique = true)
     @Size(min = 3, max = 32)
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "team", cascade = CascadeType.ALL)
-    private Set<TeamMember> teamMembers;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "team_tournament",
+            joinColumns = @JoinColumn(name = "team_id"),
+            inverseJoinColumns = @JoinColumn(name = "tournament_id"))
+    private Set<Tournament> tournaments;
+
+
 
     public Long getId() {
         return id;
@@ -37,11 +44,11 @@ public class Team {
         this.name = name;
     }
 
-    public Set<TeamMember> getTeamMembers() {
-        return teamMembers;
+    public Set<Tournament> getTournaments() {
+        return tournaments;
     }
 
-    public void setTeamMembers(Set<TeamMember> teamMembers) {
-        this.teamMembers = teamMembers;
+    public void setTournaments(Set<Tournament> tournaments) {
+        this.tournaments = tournaments;
     }
 }
