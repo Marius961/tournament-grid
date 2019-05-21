@@ -13,6 +13,6 @@ public interface MatchRepo extends PagingAndSortingRepository<Match, Long> {
 
     List<Match> findAllByTournamentAndStage(Tournament tournament, Stage stage);
 
-    @Query("SELECT m.winner FROM Match m WHERE m.tournament = :tournament AND m.stage = :stage")
+    @Query("SELECT m.winner FROM Match m WHERE m.tournament = :tournament AND m.stage = :stage order by m.winner.sequentNumber DESC")
     List<TournamentTeam> findStageWinners(Tournament tournament, Stage stage);
 }

@@ -6,8 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class Tournament {
@@ -16,6 +16,7 @@ public class Tournament {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank
     @Size(min = 2, max = 64)
     private String name;
 
@@ -40,10 +41,14 @@ public class Tournament {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "tournament", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<TournamentTeam> tournamentTeams;
+    private List<TournamentTeam> tournamentTeams;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "tournament", cascade = CascadeType.ALL)
+    @OrderBy("stage ASC")
     private Set<Match> matches;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private Team tournamentWinner;
 
     public Long getId() {
         return id;
@@ -93,11 +98,11 @@ public class Tournament {
         this.description = description;
     }
 
-    public Set<TournamentTeam> getTournamentTeams() {
-        return tournamentTeams;
+    public List<TournamentTeam> getTournamentTeams() {
+        return this.tournamentTeams;
     }
 
-    public void setTournamentTeams(Set<TournamentTeam> tournamentTeams) {
+    public void setTournamentTeams(List<TournamentTeam> tournamentTeams) {
         this.tournamentTeams = tournamentTeams;
     }
 
@@ -115,5 +120,13 @@ public class Tournament {
 
     public void setCurrentStage(Stage currentStage) {
         this.currentStage = currentStage;
+    }
+
+    public Team getTournamentWinner() {
+        return tournamentWinner;
+    }
+
+    public void setTournamentWinner(Team tournamentWinner) {
+        this.tournamentWinner = tournamentWinner;
     }
 }

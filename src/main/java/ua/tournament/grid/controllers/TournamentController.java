@@ -7,6 +7,8 @@ import ua.tournament.grid.entities.Tournament;
 import ua.tournament.grid.exceptions.NotFoundException;
 import ua.tournament.grid.services.TournamentService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/tournaments")
 public class TournamentController {
@@ -19,7 +21,7 @@ public class TournamentController {
     }
 
     @GetMapping
-    public Page<Tournament> getAllTournaments(@RequestParam(name = "p") int page) {
+    public Page<Tournament> getAllTournaments(@Valid @RequestParam(name = "p") int page) {
         return tournamentService.getAllTournaments(page);
     }
 

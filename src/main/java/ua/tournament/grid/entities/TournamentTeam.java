@@ -3,6 +3,8 @@ package ua.tournament.grid.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class TournamentTeam {
@@ -11,13 +13,14 @@ public class TournamentTeam {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private int sequentNumber;
+    private Integer sequentNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tournament_id")
     @JsonBackReference
     private Tournament tournament;
 
+    @NotNull
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "stage_id")
     private Team team;
@@ -46,11 +49,11 @@ public class TournamentTeam {
         this.team = team;
     }
 
-    public int getSequentNumber() {
+    public Integer getSequentNumber() {
         return sequentNumber;
     }
 
-    public void setSequentNumber(int sequentNumber) {
+    public void setSequentNumber(Integer sequentNumber) {
         this.sequentNumber = sequentNumber;
     }
 }

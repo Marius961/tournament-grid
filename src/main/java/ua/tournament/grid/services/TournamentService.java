@@ -36,29 +36,38 @@ public class TournamentService {
 
     public void createTournament(Tournament tournament) throws NotFoundException {
         int teamsCount = tournament.getTournamentTeams().size();
+
+
         if (teamsCount == 2 || teamsCount == 4 || teamsCount == 8 || teamsCount == 16 || teamsCount == 32 || teamsCount == 64) {
             Set<TournamentTeam> verifiedTournamentTeams = new HashSet<>();
-
-            List<Integer> sequentNumbers = getShuffledNumbersArray(tournament.getTournamentTeams().size());
+            List<Integer> sequentNumbers = getShuffledNumbersArray(teamsCount);
 
             int index = 0;
+
             for (TournamentTeam tournamentTeam : tournament.getTournamentTeams()) {
                 Optional<Team> opTeam = teamRepo.findByName(tournamentTeam.getTeam().getName());
+
                 tournamentTeam.setTournament(tournament);
                 tournamentTeam.setSequentNumber(sequentNumbers.get(index));
                 index++;
+
                 if (opTeam.isPresent()) {
                     tournamentTeam.setTeam(opTeam.get());
-                    verifiedTournamentTeams.add(tournamentTeam);
+                    if (!isTeamAlreadyAdded(verifiedTournamentTeams, opTeam.get())) {
+                        verifiedTournamentTeams.add(tournamentTeam);
+                    } else throw new NotFoundException("Cannot add 2 same teams");
                 } else {
-                    teamRepo.save(tournamentTeam.getTeam());
-                    verifiedTournamentTeams.add(tournamentTeam);
+                    Team newTeam = tournamentTeam.getTeam();
+                    teamRepo.save(newTeam);
+                    if (!isTeamAlreadyAdded(verifiedTournamentTeams, tournamentTeam.getTeam())) {
+                        tournamentTeam.setId(null);
+                        tournamentTeam.setTeam(newTeam);
+                        verifiedTournamentTeams.add(tournamentTeam);
+                    } else throw new NotFoundException("Cannot add 2 same teams");
                 }
             }
             Optional<Stage> opStage = stageRepo.findByRequiredTeamsCount(teamsCount);
-
             opStage.ifPresent(tournament::setCurrentStage);
-
             if (teamsCount == verifiedTournamentTeams.size()) {
                 tournament.setId(null);
                 tournamentRepo.save(tournament);
@@ -79,5 +88,12 @@ public class TournamentService {
 
     public Page<Tournament> getAllTournaments(int page) {
         return tournamentRepo.findAll(PageRequest.of(page, 16));
+    }
+
+    public boolean isTeamAlreadyAdded(Set<TournamentTeam> teams, Team team) {
+        for (TournamentTeam tournamentTeam: teams) {
+            if (tournamentTeam.getTeam().equals(team)) return true;
+        }
+        return false;
     }
 }

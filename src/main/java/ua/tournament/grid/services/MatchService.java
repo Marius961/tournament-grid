@@ -33,10 +33,13 @@ public class MatchService {
         Optional<Tournament> opTournament = tournamentRepo.findById(tournamentId);
         if (opTournament.isPresent()) {
             Tournament tournament = opTournament.get();
+
             List<Match> matches = new ArrayList<>();
-            List<TournamentTeam> tournamentTeams = new ArrayList<>(tournament.getTournamentTeams());
+            List<TournamentTeam> tournamentTeams = tournament.getTournamentTeams();
             for (int i = 0; i < tournament.getTournamentTeams().size(); i++) {
-                matches.add(new Match(tournament, tournament.getCurrentStage(), tournamentTeams.get(i), tournamentTeams.get(i++)));
+                System.out.println(tournamentTeams.get(i).getSequentNumber() + "\n" + tournamentTeams.get(i+1).getSequentNumber());
+                matches.add(new Match(tournament, tournament.getCurrentStage(), tournamentTeams.get(i), tournamentTeams.get(i+1)));
+                i++;
             }
             matchRepo.saveAll(matches);
         }
@@ -44,28 +47,23 @@ public class MatchService {
 
     public void createNextStage(Long tournamentId) throws NotFoundException {
         Optional<Tournament> opTournament = tournamentRepo.findById(tournamentId);
-        if (opTournament.isPresent()) {
+        if (opTournament.isPresent() && opTournament.get().getTournamentWinner() == null) {
             Tournament tournament = opTournament.get();
             List<TournamentTeam> stageWinners = matchRepo.findStageWinners(tournament, tournament.getCurrentStage());
             Stage currentStage = tournament.getCurrentStage();
             if (stageWinners.size() == currentStage.getRequiredTeamsCount() / 2) {
-                switch (tournament.getCurrentStage().getCode()) {
-                    case ("0"): tournament.setCurrentStage(stageRepo.findByCode("1").orElse(null));
-                    case ("1"): tournament.setCurrentStage(stageRepo.findByCode("2").orElse(null));
-                    case ("2"): tournament.setCurrentStage(stageRepo.findByCode("3").orElse(null));
-                    case ("3"): tournament.setCurrentStage(stageRepo.findByCode("4").orElse(null));
-                    case ("4"): tournament.setCurrentStage(stageRepo.findByCode("5").orElse(null));
-                }
+                tournament.setCurrentStage(stageRepo.findByRequiredTeamsCount(currentStage.getRequiredTeamsCount() / 2).orElse(null));
                 if (tournament.getCurrentStage() != null && tournament.getCurrentStage() != currentStage) {
                     List<Match> nextStageMatches = new ArrayList<>();
                     for (int i = 0; i < stageWinners.size(); i++) {
-                        nextStageMatches.add(new Match(tournament, tournament.getCurrentStage(), stageWinners.get(i), stageWinners.get(i++)));
+                        nextStageMatches.add(new Match(tournament, tournament.getCurrentStage(), stageWinners.get(i), stageWinners.get(i+1)));
+                        i++;
                     }
                     matchRepo.saveAll(nextStageMatches);
                     tournamentRepo.save(tournament);
                 } else throw new NotFoundException("Wrong stage");
             } else throw new NotFoundException("Unhandled");
-        }
+        } else throw new NotFoundException("This tournament already have winner");
     }
 
     public void setMatchWinner(Long matchId, double firstTeamResult, double secondTeamResult) throws NotFoundException {
@@ -76,11 +74,20 @@ public class MatchService {
                 if (firstTeamResult > secondTeamResult) {
                     match.setWinner(match.getFirstTeam());
                 } else match.setWinner(match.getSecondTeam());
-
                 match.setFirstTeamResult(firstTeamResult);
                 match.setSecondTeamResult(secondTeamResult);
                 matchRepo.save(match);
-                createNextStage(match.getTournament().getId());
+
+                if (match.getStage().getRequiredTeamsCount() == 2) {
+                    Optional<Tournament> opTournament = tournamentRepo.findById(match.getTournament().getId());
+                    if (opTournament.isPresent()) {
+                        Tournament tournament = opTournament.get();
+                        tournament.setTournamentWinner(match.getWinner().getTeam());
+                        tournamentRepo.save(tournament);
+                    }
+                } else {
+                    createNextStage(match.getTournament().getId());
+                }
             } else throw new NotFoundException("Match already have winner");
         } else throw new NotFoundException("Cannot find match with id " + matchId);
     }
