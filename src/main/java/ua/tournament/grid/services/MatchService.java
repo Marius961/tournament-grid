@@ -10,6 +10,7 @@ import ua.tournament.grid.exceptions.NotFoundException;
 import ua.tournament.grid.repo.MatchRepo;
 import ua.tournament.grid.repo.StageRepo;
 import ua.tournament.grid.repo.TournamentRepo;
+import ua.tournament.grid.repo.TournamentTeamRepo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,23 +22,23 @@ public class MatchService {
     private final MatchRepo matchRepo;
     private final TournamentRepo tournamentRepo;
     private final StageRepo stageRepo;
+    private final TournamentTeamRepo tournamentTeamRepo;
 
     @Autowired
-    public MatchService(MatchRepo matchRepo, TournamentRepo tournamentRepo, StageRepo stageRepo) {
+    public MatchService(MatchRepo matchRepo, TournamentRepo tournamentRepo, StageRepo stageRepo, TournamentTeamRepo tournamentTeamRepo) {
         this.matchRepo = matchRepo;
         this.tournamentRepo = tournamentRepo;
         this.stageRepo = stageRepo;
+        this.tournamentTeamRepo = tournamentTeamRepo;
     }
 
     public void createMatchesForTournament(Long tournamentId) {
         Optional<Tournament> opTournament = tournamentRepo.findById(tournamentId);
         if (opTournament.isPresent()) {
             Tournament tournament = opTournament.get();
-
             List<Match> matches = new ArrayList<>();
-            List<TournamentTeam> tournamentTeams = tournament.getTournamentTeams();
-            for (int i = 0; i < tournament.getTournamentTeams().size(); i++) {
-                System.out.println(tournamentTeams.get(i).getSequentNumber() + "\n" + tournamentTeams.get(i+1).getSequentNumber());
+            List<TournamentTeam> tournamentTeams = tournamentTeamRepo.findByTournamentIdOrderBySequentNumberAsc(tournamentId);
+            for (int i = 0; i < tournamentTeams.size(); i++) {
                 matches.add(new Match(tournament, tournament.getCurrentStage(), tournamentTeams.get(i), tournamentTeams.get(i+1)));
                 i++;
             }
