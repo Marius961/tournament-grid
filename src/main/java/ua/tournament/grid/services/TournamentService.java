@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import ua.tournament.grid.entities.Stage;
 import ua.tournament.grid.entities.Team;
 import ua.tournament.grid.entities.Tournament;
 import ua.tournament.grid.entities.TournamentTeam;
 import ua.tournament.grid.exceptions.NotFoundException;
+import ua.tournament.grid.repo.StageRepo;
 import ua.tournament.grid.repo.TeamRepo;
 import ua.tournament.grid.repo.TournamentRepo;
 import ua.tournament.grid.repo.TournamentTeamRepo;
@@ -20,12 +22,16 @@ public class TournamentService {
     private final TournamentRepo tournamentRepo;
     private final TeamRepo teamRepo;
     private final TournamentTeamRepo tournamentTeamRepo;
+    private final MatchService matchService;
+    private final StageRepo stageRepo;
 
     @Autowired
-    public TournamentService(TournamentRepo tournamentRepo, TeamRepo teamRepo, TournamentTeamRepo tournamentTeamRepo) {
+    public TournamentService(TournamentRepo tournamentRepo, TeamRepo teamRepo, TournamentTeamRepo tournamentTeamRepo, MatchService matchService, StageRepo stageRepo) {
         this.tournamentRepo = tournamentRepo;
         this.teamRepo = teamRepo;
         this.tournamentTeamRepo = tournamentTeamRepo;
+        this.matchService = matchService;
+        this.stageRepo = stageRepo;
     }
 
     public void createTournament(Tournament tournament) throws NotFoundException {
@@ -49,10 +55,15 @@ public class TournamentService {
                     verifiedTournamentTeams.add(tournamentTeam);
                 }
             }
+            Optional<Stage> opStage = stageRepo.findByRequiredTeamsCount(teamsCount);
+
+            opStage.ifPresent(tournament::setCurrentStage);
+
             if (teamsCount == verifiedTournamentTeams.size()) {
                 tournament.setId(null);
                 tournamentRepo.save(tournament);
                 tournamentTeamRepo.saveAll(verifiedTournamentTeams);
+                matchService.createMatchesForTournament(tournament.getId());
             } else throw new NotFoundException("Can't add two teams with the same names to tournament");
         } else throw new NotFoundException("Count of teams in tournament must be 2, 4, 8, 16, 32 or 64. In your tournament " + teamsCount + " teams");
     }

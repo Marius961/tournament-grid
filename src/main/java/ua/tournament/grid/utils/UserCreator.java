@@ -43,12 +43,12 @@ public class UserCreator {
         userRepo.save(admin);
 
         Set<Stage> stageSet = new HashSet<>();
-        stageSet.add(new Stage("Кваліфікації", 64));
-        stageSet.add(new Stage("Етап претендентів", 32));
-        stageSet.add(new Stage("Груповий етап", 16));
-        stageSet.add(new Stage("Чверть фінал", 8));
-        stageSet.add(new Stage("напів-фінал", 4));
-        stageSet.add(new Stage("Фінал", 4));
+        stageSet.add(new Stage("Кваліфікації", "0", 64));
+        stageSet.add(new Stage("Етап претендентів", "1", 32));
+        stageSet.add(new Stage("Груповий етап","2", 16));
+        stageSet.add(new Stage("Чверть фінал", "3", 8));
+        stageSet.add(new Stage("напів-фінал", "4", 4));
+        stageSet.add(new Stage("Фінал", "5",2));
         stageRepo.saveAll(stageSet);
     }
 }

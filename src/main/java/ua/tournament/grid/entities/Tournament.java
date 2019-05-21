@@ -19,6 +19,10 @@ public class Tournament {
     @Size(min = 2, max = 64)
     private String name;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "current_stage")
+    private Stage currentStage;
+
     @Size(min = 3, max = 256)
     private String location;
 
@@ -103,5 +107,13 @@ public class Tournament {
 
     public void setMatches(Set<Match> matches) {
         this.matches = matches;
+    }
+
+    public Stage getCurrentStage() {
+        return currentStage;
+    }
+
+    public void setCurrentStage(Stage currentStage) {
+        this.currentStage = currentStage;
     }
 }

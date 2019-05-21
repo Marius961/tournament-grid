@@ -1,5 +1,7 @@
 package ua.tournament.grid.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -7,12 +9,24 @@ import javax.validation.constraints.NotNull;
 @Table(name = "tournament_match")
 public class Match {
 
+
+    public Match() {
+    }
+
+    public Match(Tournament tournament, Stage stage, TournamentTeam firstTeam, TournamentTeam secondTeam) {
+        this.tournament = tournament;
+        this.stage = stage;
+        this.firstTeam = firstTeam;
+        this.secondTeam = secondTeam;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tournament_id")
+    @JsonIgnore
     private Tournament tournament;
 
     @OneToOne(fetch = FetchType.EAGER)
@@ -21,17 +35,19 @@ public class Match {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "first_team_id")
-    private Team firstTeam;
+    private TournamentTeam firstTeam;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "second_team_id")
-    private Team secondTeam;
+    private TournamentTeam secondTeam;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "winner_id")
-    private Team winner;
+    private TournamentTeam winner;
 
-    private double matchResult;
+    private double firstTeamResult;
+
+    private double secondTeamResult;
 
     public Long getId() {
         return id;
@@ -57,36 +73,43 @@ public class Match {
         this.stage = stage;
     }
 
-    public Team getFirstTeam() {
+    public TournamentTeam getFirstTeam() {
         return firstTeam;
     }
 
-    public void setFirstTeam(Team firstTeam) {
+    public void setFirstTeam(TournamentTeam firstTeam) {
         this.firstTeam = firstTeam;
     }
 
-    public Team getSecondTeam() {
+    public TournamentTeam getSecondTeam() {
         return secondTeam;
     }
 
-    public void setSecondTeam(Team secondTeam) {
+    public void setSecondTeam(TournamentTeam secondTeam) {
         this.secondTeam = secondTeam;
     }
 
-    public Team getWinner() {
+    public TournamentTeam getWinner() {
         return winner;
     }
 
-    public void setWinner(Team winner) {
+    public void setWinner(TournamentTeam winner) {
         this.winner = winner;
     }
 
-    public double getMatchResult() {
-        return matchResult;
+    public double getFirstTeamResult() {
+        return firstTeamResult;
     }
 
-    public void setMatchResult(double matchResult) {
-        this.matchResult = matchResult;
+    public void setFirstTeamResult(double firstTeamResult) {
+        this.firstTeamResult = firstTeamResult;
     }
 
+    public double getSecondTeamResult() {
+        return secondTeamResult;
+    }
+
+    public void setSecondTeamResult(double secondTeamResult) {
+        this.secondTeamResult = secondTeamResult;
+    }
 }
