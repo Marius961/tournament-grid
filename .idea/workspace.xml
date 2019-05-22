@@ -3,16 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="c18481cb-442d-47c4-8164-2099fd6c7918" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/Config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/config/CorsConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/Config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/controllers/MatchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/controllers/MatchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/config/WebSecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/controllers/TournamentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/controllers/TournamentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Tournament.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Team.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/TournamentTeam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/TournamentTeam.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/repo/MatchRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/repo/MatchRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/services/MatchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/services/MatchService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ua/tournament/grid/Config/CorsConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ua/tournament/grid/Config/CorsConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ua/tournament/grid/Config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ua/tournament/grid/Config/WebSecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ua/tournament/grid/controllers/TournamentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ua/tournament/grid/controllers/TournamentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/services/TournamentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/services/TournamentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/utils/UserCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/tournament/grid/utils/UserCreator.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -42,79 +39,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/repo/TournamentRepo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/repo/TeamRepo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/services/MatchService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/controllers/MatchController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="26" column="35" lean-forward="true" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/config/WebSecurityConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="56" column="126" selection-start-line="56" selection-start-column="126" selection-end-line="56" selection-end-column="126" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Team.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Tournament.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="50" column="33" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="33" />
+            <state relative-caret-position="777">
+              <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -123,13 +51,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/repo/MatchRepo.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Team.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="533">
+              <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#0#118#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/utils/UserCreator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="407">
+              <caret line="45" column="43" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -179,22 +118,22 @@
         <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/repo/TournamentRepo.java" />
         <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/repo/TeamRepo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Team.java" />
         <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Stage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/utils/UserCreator.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/repo/StageRepo.java" />
         <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Match.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/services/TournamentService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/TournamentTeam.java" />
         <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/repo/TournamentTeamRepo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/controllers/TournamentController.java" />
         <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Tournament.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/repo/MatchRepo.java" />
         <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/exceptions/NotFoundException.java" />
         <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/services/MatchService.java" />
         <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/controllers/MatchController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/repo/MatchRepo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/services/TournamentService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/controllers/TournamentController.java" />
         <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/config/WebSecurityConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/TournamentTeam.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Team.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ua/tournament/grid/utils/UserCreator.java" />
       </list>
     </option>
   </component>
@@ -314,6 +253,15 @@
               <item name="tournament-grid" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="grid" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tournament-grid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tournament-grid" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -403,12 +351,12 @@
       <workItem from="1558424855915" duration="8087000" />
       <workItem from="1558446937943" duration="1191000" />
       <workItem from="1558464090024" duration="996000" />
-      <workItem from="1558505494378" duration="10319000" />
+      <workItem from="1558505494378" duration="16866000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45893000" />
+    <option name="totallyTimeSpent" value="52440000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -423,7 +371,7 @@
     <frame x="-8" y="-8" width="1618" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2724359" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2724359" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -632,16 +580,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/utils/UserCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.9.RELEASE/spring-web-5.0.9.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="146">
@@ -667,23 +605,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="11" column="66" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/TournamentTeam.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="51" column="39" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
-          <folding>
-            <element signature="e#1112#1113#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/services/TournamentService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="37" column="61" selection-start-line="37" selection-start-column="57" selection-end-line="37" selection-end-column="61" />
         </state>
       </provider>
     </entry>
@@ -718,16 +639,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-118">
           <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/controllers/TournamentController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -776,28 +687,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/repo/MatchRepo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#0#118#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/exceptions/NotFoundException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/services/MatchService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
         </state>
       </provider>
     </entry>
@@ -811,32 +704,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/config/WebSecurityConfig.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/repo/MatchRepo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="56" column="126" selection-start-line="56" selection-start-column="126" selection-end-line="56" selection-end-column="126" />
+        <state relative-caret-position="357">
+          <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Team.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/services/MatchService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        <state relative-caret-position="1443">
+          <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/services/TournamentService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="90" column="66" lean-forward="true" selection-start-line="90" selection-start-column="66" selection-end-line="90" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/config/WebSecurityConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="533">
+          <caret line="56" column="69" selection-start-line="56" selection-start-column="69" selection-end-line="56" selection-end-column="69" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/controllers/TournamentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="29" column="42" lean-forward="true" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/TournamentTeam.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="24" column="31" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+          <folding>
+            <element signature="e#1076#1077#0" expanded="true" />
+            <element signature="e#1112#1113#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Tournament.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="50" column="33" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="33" />
+        <state relative-caret-position="777">
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/entities/Team.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="533">
+          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ua/tournament/grid/utils/UserCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="45" column="43" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

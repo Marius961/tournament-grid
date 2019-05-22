@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/tournaments**", "/api/matches/{id}").permitAll()
-                .antMatchers("/api/tournaments**", "/api/matches**", "/api/matches/**").hasAuthority(Role.ADMIN.getAuthority())
+                .antMatchers("/api/tournaments**", "/api/tournaments/**", "/api/matches**", "/api/matches/**").hasAuthority(Role.ADMIN.getAuthority())
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))

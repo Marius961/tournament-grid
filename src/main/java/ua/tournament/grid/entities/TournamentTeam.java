@@ -22,7 +22,7 @@ public class TournamentTeam {
 
     @NotNull
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "stage_id")
+    @JoinColumn(name = "team_id")
     private Team team;
 
     public Long getId() {

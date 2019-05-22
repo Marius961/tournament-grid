@@ -19,15 +19,6 @@ public class Team {
     @Size(min = 3, max = 32)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "team_tournament",
-            joinColumns = @JoinColumn(name = "team_id"),
-            inverseJoinColumns = @JoinColumn(name = "tournament_id"))
-    private Set<Tournament> tournaments;
-
-
-
     public Long getId() {
         return id;
     }
@@ -42,13 +33,5 @@ public class Team {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<Tournament> getTournaments() {
-        return tournaments;
-    }
-
-    public void setTournaments(Set<Tournament> tournaments) {
-        this.tournaments = tournaments;
     }
 }

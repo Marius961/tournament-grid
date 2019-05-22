@@ -25,6 +25,11 @@ public class TournamentController {
         return tournamentService.getAllTournaments(page);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteTournament(@PathVariable Long id) throws NotFoundException {
+        tournamentService.deleteTournament(id);
+    }
+
     @PostMapping
     public void createTournament(@RequestBody Tournament tournament) throws NotFoundException {
         tournamentService.createTournament(tournament);

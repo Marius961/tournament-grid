@@ -3,16 +3,11 @@ package ua.tournament.grid.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import ua.tournament.grid.entities.Stage;
-import ua.tournament.grid.entities.Team;
-import ua.tournament.grid.entities.Tournament;
-import ua.tournament.grid.entities.TournamentTeam;
+import ua.tournament.grid.entities.*;
 import ua.tournament.grid.exceptions.NotFoundException;
-import ua.tournament.grid.repo.StageRepo;
-import ua.tournament.grid.repo.TeamRepo;
-import ua.tournament.grid.repo.TournamentRepo;
-import ua.tournament.grid.repo.TournamentTeamRepo;
+import ua.tournament.grid.repo.*;
 
 import java.util.*;
 
@@ -87,7 +82,13 @@ public class TournamentService {
     }
 
     public Page<Tournament> getAllTournaments(int page) {
-        return tournamentRepo.findAll(PageRequest.of(page, 16));
+        return tournamentRepo.findAll(PageRequest.of(page, 16, Sort.by("id").descending()));
+    }
+
+    public void deleteTournament(Long tournamentId) throws NotFoundException {
+        if (tournamentRepo.existsById(tournamentId)) {
+            tournamentRepo.deleteById(tournamentId);
+        } else throw new NotFoundException("Cannot find tournament");
     }
 
     public boolean isTeamAlreadyAdded(Set<TournamentTeam> teams, Team team) {

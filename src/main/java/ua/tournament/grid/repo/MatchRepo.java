@@ -1,5 +1,6 @@
 package ua.tournament.grid.repo;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import ua.tournament.grid.entities.Match;
@@ -17,4 +18,5 @@ public interface MatchRepo extends PagingAndSortingRepository<Match, Long> {
     @Query("SELECT m.winner FROM Match m WHERE m.tournament = :tournament AND m.stage = :stage order by m.winner.sequentNumber ASC ")
     List<TournamentTeam> findStageWinners(Tournament tournament, Stage stage);
 
+    List<Match> findByTournamentIdOrderByStageId(Long tournamentId);
 }
