@@ -21,7 +21,7 @@ public class TournamentController {
     }
 
     @GetMapping
-    public Page<Tournament> getAllTournaments(@Valid @RequestParam(name = "p") int page) {
+    public Page<Tournament> getAllTournaments(@RequestParam(name = "p") int page) {
         return tournamentService.getAllTournaments(page);
     }
 

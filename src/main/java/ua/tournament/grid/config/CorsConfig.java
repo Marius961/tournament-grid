@@ -1,4 +1,4 @@
-package ua.tournament.grid.Config;
+package ua.tournament.grid.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

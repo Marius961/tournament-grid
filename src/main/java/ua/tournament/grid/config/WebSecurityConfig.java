@@ -1,8 +1,9 @@
-package ua.tournament.grid.Config;
+package ua.tournament.grid.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +17,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import ua.tournament.grid.AuthConfig.JWTAuthenticationFilter;
 import ua.tournament.grid.AuthConfig.JWTAuthorizationFilter;
+import ua.tournament.grid.entities.Role;
 import ua.tournament.grid.services.UserService;
 
 import static ua.tournament.grid.AuthConfig.SecurityConstants.SIGN_IN_URL;
@@ -51,6 +53,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/tournaments**", "/api/matches/{id}").permitAll()
+                .antMatchers("/api/tournaments**", "/api/matches**", "/api/matches/**").hasAuthority(Role.ADMIN.getAuthority())
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))

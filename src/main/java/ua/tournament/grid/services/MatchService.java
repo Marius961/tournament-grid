@@ -63,7 +63,7 @@ public class MatchService {
                     matchRepo.saveAll(nextStageMatches);
                     tournamentRepo.save(tournament);
                 } else throw new NotFoundException("Wrong stage");
-            } else throw new NotFoundException("Unhandled");
+            }
         } else throw new NotFoundException("This tournament already have winner");
     }
 
@@ -72,24 +72,35 @@ public class MatchService {
         if (opMatch.isPresent()) {
             if (opMatch.get().getWinner() == null) {
                 Match match = opMatch.get();
-                if (firstTeamResult > secondTeamResult) {
-                    match.setWinner(match.getFirstTeam());
-                } else match.setWinner(match.getSecondTeam());
-                match.setFirstTeamResult(firstTeamResult);
-                match.setSecondTeamResult(secondTeamResult);
-                matchRepo.save(match);
+                boolean isResultValid = firstTeamResult != secondTeamResult && firstTeamResult > 0 && secondTeamResult > 0;
 
-                if (match.getStage().getRequiredTeamsCount() == 2) {
-                    Optional<Tournament> opTournament = tournamentRepo.findById(match.getTournament().getId());
-                    if (opTournament.isPresent()) {
-                        Tournament tournament = opTournament.get();
-                        tournament.setTournamentWinner(match.getWinner().getTeam());
-                        tournamentRepo.save(tournament);
+                if (isResultValid) {
+                    if (firstTeamResult > secondTeamResult) {
+                        match.setWinner(match.getFirstTeam());
+                    } else match.setWinner(match.getSecondTeam());
+
+                    match.setFirstTeamResult(firstTeamResult);
+                    match.setSecondTeamResult(secondTeamResult);
+                    matchRepo.save(match);
+
+
+
+                    if (match.getStage().getRequiredTeamsCount() == 2) {
+                        Optional<Tournament> opTournament = tournamentRepo.findById(match.getTournament().getId());
+                        if (opTournament.isPresent()) {
+                            Tournament tournament = opTournament.get();
+                            tournament.setTournamentWinner(match.getWinner().getTeam());
+                            tournamentRepo.save(tournament);
+                        }
+                    } else {
+                        createNextStage(match.getTournament().getId());
                     }
-                } else {
-                    createNextStage(match.getTournament().getId());
-                }
+                } else throw new NotFoundException("Result is not valid");
             } else throw new NotFoundException("Match already have winner");
         } else throw new NotFoundException("Cannot find match with id " + matchId);
+    }
+
+    public Match getMatch(Long id) throws NotFoundException {
+        return matchRepo.findById(id).orElseThrow(() -> new NotFoundException("Cannot find match"));
     }
 }
