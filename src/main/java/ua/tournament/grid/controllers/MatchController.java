@@ -21,9 +21,4 @@ public class MatchController {
     public void setMatchWinner(@RequestParam Long matchId, double firstTeamResult, double secondTeamResult) throws NotFoundException {
         matchService.setMatchWinner(matchId, firstTeamResult, secondTeamResult);
     }
-
-    @GetMapping("/{id}")
-    public Match getMatch(@PathVariable Long id) throws NotFoundException {
-        return matchService.getMatch(id);
-    }
 }

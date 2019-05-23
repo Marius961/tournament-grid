@@ -99,8 +99,4 @@ public class MatchService {
             } else throw new NotFoundException("Match already have winner");
         } else throw new NotFoundException("Cannot find match with id " + matchId);
     }
-
-    public Match getMatch(Long id) throws NotFoundException {
-        return matchRepo.findById(id).orElseThrow(() -> new NotFoundException("Cannot find match"));
-    }
 }

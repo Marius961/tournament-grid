@@ -30,6 +30,11 @@ public class TournamentController {
         tournamentService.deleteTournament(id);
     }
 
+    @GetMapping("/{id}")
+    public Tournament getTournament(@PathVariable Long id) throws NotFoundException {
+        return tournamentService.getTournament(id);
+    }
+
     @PostMapping
     public void createTournament(@RequestBody Tournament tournament) throws NotFoundException {
         tournamentService.createTournament(tournament);

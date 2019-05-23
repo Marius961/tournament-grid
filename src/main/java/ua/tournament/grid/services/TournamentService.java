@@ -85,13 +85,17 @@ public class TournamentService {
         return tournamentRepo.findAll(PageRequest.of(page, 16, Sort.by("id").descending()));
     }
 
+    public Tournament getTournament(Long id) throws NotFoundException {
+        return tournamentRepo.findFirstById(id).orElseThrow(() -> new NotFoundException("Cannot find tournament"));
+    }
+
     public void deleteTournament(Long tournamentId) throws NotFoundException {
         if (tournamentRepo.existsById(tournamentId)) {
             tournamentRepo.deleteById(tournamentId);
         } else throw new NotFoundException("Cannot find tournament");
     }
 
-    public boolean isTeamAlreadyAdded(Set<TournamentTeam> teams, Team team) {
+    private boolean isTeamAlreadyAdded(Set<TournamentTeam> teams, Team team) {
         for (TournamentTeam tournamentTeam: teams) {
             if (tournamentTeam.getTeam().equals(team)) return true;
         }

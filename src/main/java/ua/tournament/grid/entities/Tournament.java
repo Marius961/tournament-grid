@@ -44,7 +44,7 @@ public class Tournament {
     private List<TournamentTeam> tournamentTeams;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "tournament", cascade = CascadeType.ALL)
-    @OrderBy("stage.id ASC ")
+    @OrderBy("id ASC ")
     private Set<Match> matches;
 
     @OneToOne(fetch = FetchType.EAGER)
