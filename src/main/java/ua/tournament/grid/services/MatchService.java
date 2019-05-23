@@ -72,7 +72,7 @@ public class MatchService {
         if (opMatch.isPresent()) {
             if (opMatch.get().getWinner() == null) {
                 Match match = opMatch.get();
-                boolean isResultValid = firstTeamResult != secondTeamResult && firstTeamResult > 0 && secondTeamResult > 0;
+                boolean isResultValid = firstTeamResult != secondTeamResult && firstTeamResult > -1 && secondTeamResult > -1;
 
                 if (isResultValid) {
                     if (firstTeamResult > secondTeamResult) {
