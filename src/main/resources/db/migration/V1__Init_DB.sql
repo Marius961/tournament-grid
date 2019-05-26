@@ -4,17 +4,17 @@ create table hibernate_sequence
 ) engine = InnoDB;
 
 insert into hibernate_sequence
-values (1);
+values (7);
 insert into hibernate_sequence
-values (1);
+values (7);
 insert into hibernate_sequence
-values (1);
+values (7);
 insert into hibernate_sequence
-values (1);
+values (7);
 insert into hibernate_sequence
-values (1);
+values (7);
 insert into hibernate_sequence
-values (1);
+values (7);
 
 create table stage
 (
