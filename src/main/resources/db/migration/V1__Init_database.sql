@@ -2,7 +2,6 @@ create table hibernate_sequence
 (
     next_val bigint
 ) engine = InnoDB;
-
 insert into hibernate_sequence
 values (7);
 insert into hibernate_sequence
@@ -15,27 +14,22 @@ insert into hibernate_sequence
 values (7);
 insert into hibernate_sequence
 values (7);
-
 create table stage
 (
     id                   bigint  not null,
-    code                 varchar(255),
     name                 varchar(255),
     required_teams_count integer not null,
     primary key (id)
 ) engine = InnoDB;
-
 create table team
 (
     id   bigint not null,
     name varchar(32),
     primary key (id)
 ) engine = InnoDB;
-
 create table tournament
 (
     id                   bigint   not null,
-    description          varchar(2048),
     end_date             datetime not null,
     location             varchar(256),
     name                 varchar(64),
@@ -44,7 +38,6 @@ create table tournament
     tournament_winner_id bigint,
     primary key (id)
 ) engine = InnoDB;
-
 create table tournament_match
 (
     id                 bigint           not null,
@@ -57,7 +50,6 @@ create table tournament_match
     winner_id          bigint,
     primary key (id)
 ) engine = InnoDB;
-
 create table tournament_team
 (
     id             bigint not null,
@@ -66,22 +58,18 @@ create table tournament_team
     tournament_id  bigint,
     primary key (id)
 ) engine = InnoDB;
-
 create table user
 (
     id       bigint not null,
-    active   INTEGER,
     password varchar(512),
     username varchar(16),
     primary key (id)
 ) engine = InnoDB;
-
 create table user_role
 (
     user_id bigint not null,
     roles   varchar(255)
 ) engine = InnoDB;
-
 alter table team
     add constraint UK_g2l9qqsoeuynt4r5ofdt1x2td unique (name);
 alter table user

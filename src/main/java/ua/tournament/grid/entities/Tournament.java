@@ -35,10 +35,6 @@ public class Tournament {
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 
-    @NotBlank
-    @Size(min = 6, max = 2048)
-    private String description;
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "tournament", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<TournamentTeam> tournamentTeams;
@@ -90,14 +86,6 @@ public class Tournament {
         this.endDate = endDate;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public List<TournamentTeam> getTournamentTeams() {
         return this.tournamentTeams;
     }
@@ -128,5 +116,9 @@ public class Tournament {
 
     public void setTournamentWinner(Team tournamentWinner) {
         this.tournamentWinner = tournamentWinner;
+    }
+
+    private Date convertDate(Date date) {
+        return new Date(date.getTime()*1000 );
     }
 }

@@ -9,5 +9,4 @@ public interface StageRepo extends CrudRepository<Stage, Long> {
 
     Optional<Stage> findByRequiredTeamsCount(int teamsCount);
 
-    Optional<Stage> findByCode(String code);
 }

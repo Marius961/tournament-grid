@@ -33,10 +33,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    @JsonIgnore
-    @Column(columnDefinition = "INTEGER")
-    private boolean active;
-
     @Override
     @JsonIgnore
     public boolean isAccountNonExpired() {
@@ -58,7 +54,7 @@ public class User implements UserDetails {
     @Override
     @JsonIgnore
     public boolean isEnabled() {
-        return isActive();
+        return true;
     }
 
     @Override
@@ -98,14 +94,6 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public void addRole(Role role) {
